@@ -4,6 +4,8 @@ import { BackgroundURL } from '../utils/constants'
 import { checkValidData } from '../utils/validate'
 import {createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../utils/firebase'
+import {createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../utils/firebase'
 
 const Login = () => {
 
@@ -12,6 +14,7 @@ const Login = () => {
 
     const email = useRef(null)
     const password = useRef(null)
+    const username = useRef(null)
     const username = useRef(null)
 
     const toggleForm = () => {
@@ -65,9 +68,11 @@ return (
             <img src={BackgroundURL} alt="Background Image" />
         </div>
         <from onSubmit={(e)=>e.preventDefault()} className='flex absolute flex-col w-3/12 my-48 mx-auto left-0 right-0 p-10 text-white bg-black rounded-lg bg-opacity-80'>
+        <from onSubmit={(e)=>e.preventDefault()} className='flex absolute flex-col w-3/12 my-48 mx-auto left-0 right-0 p-10 text-white bg-black rounded-lg bg-opacity-80'>
             <h1 className='mb-2 font-bold text-3xl py-4'>{isSignIn ? "Sign In" : "Sign Up"}</h1>
 
             {!isSignIn &&
+                <input type='text' placeholder='Username' ref={username} className='p-3 my-3 w-full bg-neutral-700'/>
                 <input type='text' placeholder='Username' ref={username} className='p-3 my-3 w-full bg-neutral-700'/>
             }
             <input type='text' placeholder='Email Address' ref={email} className='p-3 my-3 w-full bg-neutral-700'/>
@@ -78,8 +83,11 @@ return (
             <div className='flex'>
                 <p className='text-gray-400 mx-2'>{isSignIn ? "New to Netflix? " : "Already a User?"}</p>
                 <span className='cursor-pointer' onClick={toggleForm}>{isSignIn ? "Sign Up Now" : "Sign In"}</span>
+                <p className='text-gray-400 mx-2'>{isSignIn ? "New to Netflix? " : "Already a User?"}</p>
+                <span className='cursor-pointer' onClick={toggleForm}>{isSignIn ? "Sign Up Now" : "Sign In"}</span>
             </div>
 
+        </from>
         </from>
     </div>
 )
