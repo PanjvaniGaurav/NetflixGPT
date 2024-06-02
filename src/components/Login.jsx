@@ -66,10 +66,10 @@ const Login = () => {
     }
 
 return (
-    <div>
+    <div className='w-screen h-screen'>
         <Header />
         <div className='absolute'>
-            <img src={BackgroundURL} alt="Background Image" />
+            <img src={BackgroundURL} alt="Background Image" className='h-[100vh] w-[100vw] object-cover' />
         </div>
         <form onSubmit={(e)=>e.preventDefault()} className='flex absolute flex-col w-3/12 my-48 mx-auto left-0 right-0 p-10 text-white bg-black rounded-lg bg-opacity-80'>
             <h1 className='mb-2 font-bold text-3xl py-4'>{isSignIn ? "Sign In" : "Sign Up"}</h1>

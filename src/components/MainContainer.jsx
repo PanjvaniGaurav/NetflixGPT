@@ -12,7 +12,7 @@ const MainContainer = () => {
     const {original_title, overview,id} = Movie;
     
   return (
-    <div>
+    <div className='w-screen md:h-screen'>
         <TrailerTitle title={original_title} overview={overview} />
         <TrailerBackground movie_id={id} />
     </div>

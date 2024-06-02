@@ -7,7 +7,7 @@ import SecondaryContainer from './SecondaryContainer';
 const Browse = () => {
   useNowPlaying();  
   return (
-    <div>
+    <div className='overflow-x-hidden w-[100vw]'>
         <Header />
         <MainContainer/>
         <SecondaryContainer/>
