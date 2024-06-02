@@ -2,9 +2,10 @@ import React, { useRef, useState } from 'react'
 import Header from './Header'
 import { BackgroundURL } from '../utils/constants'
 import { checkValidData } from '../utils/validate'
-import {createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
+import {createUserWithEmailAndPassword,signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../utils/firebase'
 import { useNavigate } from 'react-router-dom';
+import { set } from 'firebase/database';
 
 const Login = () => {
     const navigate = useNavigate()
@@ -32,10 +33,17 @@ const Login = () => {
             .then((userCredential) => {
               const user = userCredential.user;
               console.log(user)
+              updateProfile(auth.currentUser, {
+                displayName: username.current.value, photoURL: "https://example.com/jane-q-user/profile.jpg"
+              }).then(() => {
+                navigate('/browse')
+              }).catch((error) => {
+                SetErrMessage(error.message)
+              });
               email.current.value = ""
               password.current.value = ""
               username.current.value = "" 
-              navigate('/browse')
+              
             })
             .catch((error) => {
               const errorCode = error.code;
