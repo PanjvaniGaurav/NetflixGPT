@@ -15,7 +15,6 @@ const Login = () => {
     const email = useRef(null)
     const password = useRef(null)
     const username = useRef(null)
-    const username = useRef(null)
 
     const toggleForm = () => {
         SetIsSignIn(!isSignIn)
@@ -72,7 +71,6 @@ return (
             <h1 className='mb-2 font-bold text-3xl py-4'>{isSignIn ? "Sign In" : "Sign Up"}</h1>
 
             {!isSignIn &&
-                <input type='text' placeholder='Username' ref={username} className='p-3 my-3 w-full bg-neutral-700'/>
                 <input type='text' placeholder='Username' ref={username} className='p-3 my-3 w-full bg-neutral-700'/>
             }
             <input type='text' placeholder='Email Address' ref={email} className='p-3 my-3 w-full bg-neutral-700'/>
