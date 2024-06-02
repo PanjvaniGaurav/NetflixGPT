@@ -2,6 +2,8 @@ import React, { useRef, useState } from 'react'
 import Header from './Header'
 import { BackgroundURL } from '../utils/constants'
 import { checkValidData } from '../utils/validate'
+import {createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../utils/firebase'
 
 const Login = () => {
 
@@ -10,6 +12,7 @@ const Login = () => {
 
     const email = useRef(null)
     const password = useRef(null)
+    const username = useRef(null)
 
     const toggleForm = () => {
         SetIsSignIn(!isSignIn)
@@ -18,6 +21,41 @@ const Login = () => {
     const handleButtonClick = () =>{
         const message = checkValidData(email.current.value,password.current.value)
         SetErrMessage(message)
+
+        if(message) return;
+
+        if(!isSignIn){
+            //Sign Up
+            createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+            .then((userCredential) => {
+              const user = userCredential.user;
+              console.log(user)
+              email.current.value = ""
+              password.current.value = ""
+              username.current.value = "" 
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              SetErrMessage(errorCode + " : " + errorMessage)
+            });
+
+        }
+        else{
+            signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+            .then((userCredential) => { 
+                const user = userCredential.user;
+                email.current.value = ""
+                password.current.value = ""
+                console.log(user)
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errMessage)
+                SetErrMessage(errorCode + " : " + errorMessage)
+            });
+        }
     }
 
 return (
@@ -26,11 +64,11 @@ return (
         <div className='absolute'>
             <img src={BackgroundURL} alt="Background Image" />
         </div>
-        <form onSubmit={(e)=>e.preventDefault()} className='flex absolute flex-col w-3/12 my-48 mx-auto left-0 right-0 p-10 text-white bg-black rounded-lg bg-opacity-80'>
+        <from onSubmit={(e)=>e.preventDefault()} className='flex absolute flex-col w-3/12 my-48 mx-auto left-0 right-0 p-10 text-white bg-black rounded-lg bg-opacity-80'>
             <h1 className='mb-2 font-bold text-3xl py-4'>{isSignIn ? "Sign In" : "Sign Up"}</h1>
 
             {!isSignIn &&
-                <input type='text' placeholder='Username' className='p-3 my-3 w-full bg-neutral-700'/>
+                <input type='text' placeholder='Username' ref={username} className='p-3 my-3 w-full bg-neutral-700'/>
             }
             <input type='text' placeholder='Email Address' ref={email} className='p-3 my-3 w-full bg-neutral-700'/>
             <input type='password' placeholder='Password' ref={password} className='p-3 my-3 w-full bg-neutral-700'/>
@@ -38,11 +76,11 @@ return (
             <button className='bg-red-600 my-4 p-2 w-full text-lg rounded-md' onClick={handleButtonClick}>{isSignIn ? "Sign In" : "Sign Up"}</button>
 
             <div className='flex'>
-                <p className='text-gray-400 mx-2'>{isSignIn ? "Already a User? " : "New to Netflix?"}</p>
-                <span className='cursor-pointer' onClick={toggleForm}>{isSignIn ? "Sign In" : "Sign Up Now"}</span>
+                <p className='text-gray-400 mx-2'>{isSignIn ? "New to Netflix? " : "Already a User?"}</p>
+                <span className='cursor-pointer' onClick={toggleForm}>{isSignIn ? "Sign Up Now" : "Sign In"}</span>
             </div>
 
-        </form>
+        </from>
     </div>
 )
 }

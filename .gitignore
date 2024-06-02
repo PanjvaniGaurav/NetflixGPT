@@ -13,7 +13,6 @@ build
 .firebase
 .firebaserc
 firebase.json
-utils/firebase.js
 dist-ssr
 *.local
 
