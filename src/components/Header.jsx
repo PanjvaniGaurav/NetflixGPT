@@ -40,7 +40,7 @@ const Header = () => {
         
           {user &&
           (<div className='flex justify-center items-center'>
-          <h1 className='text-red-500 text-2xl mr-5'>Welcome {user.displayName !== null ? user.displayName : 'User'}</h1> 
+          <h3 className='text-red-500 text-2xl mr-5'>Welcome {user.displayName !== null ? user.displayName : 'User'}</h3> 
           <img className='h-20' src={usericon} alt='User Icon'/>
           <button onClick={handleSignout} className='bg-red-600 text-white px-3 py-1 rounded-lg h-14'>Sign Out</button>
            </div>
