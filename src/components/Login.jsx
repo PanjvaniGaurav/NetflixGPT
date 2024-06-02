@@ -4,10 +4,10 @@ import { BackgroundURL } from '../utils/constants'
 import { checkValidData } from '../utils/validate'
 import {createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../utils/firebase'
-import {createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../utils/firebase'
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const navigate = useNavigate()
 
     const [isSignIn,SetIsSignIn] = useState(true)
     const [errMessage,SetErrMessage] = useState(null)
@@ -35,6 +35,7 @@ const Login = () => {
               email.current.value = ""
               password.current.value = ""
               username.current.value = "" 
+              navigate('/browse')
             })
             .catch((error) => {
               const errorCode = error.code;
@@ -50,6 +51,7 @@ const Login = () => {
                 email.current.value = ""
                 password.current.value = ""
                 console.log(user)
+                navigate('/browse') 
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -66,8 +68,7 @@ return (
         <div className='absolute'>
             <img src={BackgroundURL} alt="Background Image" />
         </div>
-        <from onSubmit={(e)=>e.preventDefault()} className='flex absolute flex-col w-3/12 my-48 mx-auto left-0 right-0 p-10 text-white bg-black rounded-lg bg-opacity-80'>
-        <from onSubmit={(e)=>e.preventDefault()} className='flex absolute flex-col w-3/12 my-48 mx-auto left-0 right-0 p-10 text-white bg-black rounded-lg bg-opacity-80'>
+        <form onSubmit={(e)=>e.preventDefault()} className='flex absolute flex-col w-3/12 my-48 mx-auto left-0 right-0 p-10 text-white bg-black rounded-lg bg-opacity-80'>
             <h1 className='mb-2 font-bold text-3xl py-4'>{isSignIn ? "Sign In" : "Sign Up"}</h1>
 
             {!isSignIn &&
@@ -80,13 +81,10 @@ return (
 
             <div className='flex'>
                 <p className='text-gray-400 mx-2'>{isSignIn ? "New to Netflix? " : "Already a User?"}</p>
-                <span className='cursor-pointer' onClick={toggleForm}>{isSignIn ? "Sign Up Now" : "Sign In"}</span>
-                <p className='text-gray-400 mx-2'>{isSignIn ? "New to Netflix? " : "Already a User?"}</p>
-                <span className='cursor-pointer' onClick={toggleForm}>{isSignIn ? "Sign Up Now" : "Sign In"}</span>
+                <span className='cursor-pointer' onClick={toggleForm}>{isSignIn ? "Sign Up Now" : "Sign In"}</span> 
             </div>
 
-        </from>
-        </from>
+        </form>
     </div>
 )
 }
