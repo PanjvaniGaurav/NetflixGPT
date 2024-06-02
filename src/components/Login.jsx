@@ -4,12 +4,10 @@ import { BackgroundURL } from '../utils/constants'
 import { checkValidData } from '../utils/validate'
 import {createUserWithEmailAndPassword,signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../utils/firebase'
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
 
 const Login = () => {
-    const navigate = useNavigate()
     const dispatch = useDispatch()
     const [isSignIn,SetIsSignIn] = useState(true)
     const [errMessage,SetErrMessage] = useState(null)
@@ -33,20 +31,17 @@ const Login = () => {
             createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
             .then((userCredential) => {
               const user = userCredential.user;
-              console.log(user)
               updateProfile(auth.currentUser, {
-                displayName: username.current.value, photoURL: "https://example.com/jane-q-user/profile.jpg"
+                displayName: username.current.value
               }).then(() => {
                 const {uid,email,displayName} = auth.currentUser;
                 dispatch(addUser({uid:uid,email:email,displayName:displayName}))
-                navigate('/browse')
               }).catch((error) => {
                 SetErrMessage(error.message)
               });
               email.current.value = ""
               password.current.value = ""
               username.current.value = "" 
-              
             })
             .catch((error) => {
               const errorCode = error.code;
@@ -59,9 +54,7 @@ const Login = () => {
             .then((userCredential) => { 
                 const user = userCredential.user;
                 email.current.value = ""
-                password.current.value = ""
-                console.log(user)
-                navigate('/browse') 
+                password.current.value = "" 
             })
             .catch((error) => {
                 const errorCode = error.code;
