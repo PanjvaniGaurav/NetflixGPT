@@ -35,7 +35,7 @@ const Header = () => {
   }
 
   return (
-    <div className='absolute px-10 py-3 bg-gradient-to-b from-black w-full z-10 flex justify-between'>
+    <div className='absolute px-10 py-3 bg-gradient-to-b from-black w-full z-30 flex justify-between'>
         <img className='w-44' src={LogoURL} alt='Logo'/>
         
           {user &&
