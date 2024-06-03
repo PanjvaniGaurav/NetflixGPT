@@ -18,7 +18,7 @@ const useNowPlaying = () => {
 
   useEffect(() => {
     getNowPlaying();
-  }, [dispatch]);
+  }, []);
 };
 
 export default useNowPlaying;
