@@ -11,7 +11,6 @@ const useRomanticMovies = () => {
       const response = await fetch("https://api.themoviedb.org/3/discover/movie?api_key="+API_Key+"&with_genres=10749", API_Options);
       const data = await response.json();
       dispatch(addRomanticMovies(data.results));
-      console.log(data.results);
     } catch (error) {
       console.error("Failed to fetch now playing movies:", error);
     }
