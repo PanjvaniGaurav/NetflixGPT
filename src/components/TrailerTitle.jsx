@@ -5,7 +5,7 @@ import { RiMoreLine } from "react-icons/ri";
 const TrailerTitle = ({title,overview}) => {
   const [readMore,setreadMore] = useState(false);
   return (
-    <div className='w-full h-[110%] pt-[20%] px-24 flex justify-between absolute text-white bg-gradient-to-r from-black'>
+    <div className='w-full h-[120%] pt-[20%] px-24 flex justify-between absolute text-white bg-gradient-to-r from-black'>
     <div className='h-full '>
         <h1 className='text-4xl font-bold'>{title}</h1>
         <p className='text-lg py-6 w-5/12'>{!readMore && overview.length>200 ? overview.substring(0,200)+"..." : (overview.length>300 ? overview.substring(0,300)+"..." : overview)}</p>
