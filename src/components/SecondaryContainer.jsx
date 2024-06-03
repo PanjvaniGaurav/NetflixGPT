@@ -14,7 +14,7 @@ const SecondaryContainer = () => {
     </div>
     <div className='mt-2'>
       <MovieList title={"Horror"} movies={movies.horrorMovies}/>
-      <MovieList title={"Romantic"} movies={movies.horrorMovies}/>
+      <MovieList title={"Romantic"} movies={movies.romanticMovies}/>
     </div>
   </div>
 
