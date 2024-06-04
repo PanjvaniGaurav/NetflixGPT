@@ -35,18 +35,20 @@ const Header = () => {
   }
 
   return (
-    <div className='absolute px-10 py-3 bg-gradient-to-b from-black w-full z-30 flex justify-between'>
-        <img className='w-44' src={LogoURL} alt='Logo'/>
-        
-          {user &&
-          (<div className='flex justify-center items-center'>
-          <h3 className='text-red-500 text-2xl mr-5'>Welcome {user.displayName !== null ? user.displayName : 'User'}</h3> 
-          <img className='h-20' src={usericon} alt='User Icon'/>
-          <button onClick={handleSignout} className='bg-red-600 text-white px-3 py-1 rounded-lg h-14'>Sign Out</button>
-           </div>
-          )}
-        
+<div className='absolute px-10 py-3 bg-gradient-to-b from-black w-full z-50 flex justify-between'>   
+<img className='w-32' src={LogoURL} alt='Logo'/>
+  {user && (
+    <div className='flex items-center'>
+      <h3 className='text-white text-lg mr-4 font-semibold text-shadow'>
+        Welcome, {user.displayName !== null ? user.displayName : 'User'}
+      </h3> 
+      <img className='h-10 w-10 rounded-full mr-4 border-2 border-white' src={usericon} alt='User Icon'/>
+      <button onClick={handleSignout} className='bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-red-700 transition-colors'>
+        Sign Out
+      </button>
     </div>
+  )}
+</div>
   )
 }
 
