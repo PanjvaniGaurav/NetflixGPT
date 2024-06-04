@@ -75,13 +75,16 @@ const ClipsModal = ({ clips, onClose }) => {
               onClick={() => handleVideoClick(clip)}
             >
               <div className="relative pb-[56.25%]">
-                <iframe
-                  className="absolute top-0 left-0 w-full h-full"
-                  src={`https://www.youtube.com/embed/${clip.key}?autoplay=0`}
-                  title={clip.name}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
+                <img
+                  className="absolute top-0 left-0 w-full h-full object-cover"
+                  src={`https://img.youtube.com/vi/${clip.key}/maxresdefault.jpg`}
+                  alt={clip.name}
+                />
+                <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-white" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                  </svg>
+                </div>
               </div>
               <div className="p-4">
                 <h3 className="text-md font-semibold text-white line-clamp-2 hover:text-red-500 transition-colors">
@@ -109,12 +112,13 @@ const ClipsModal = ({ clips, onClose }) => {
             {pageNumbers.map(number => (
               <button
                 key={number}
-                onClick={() => handlePageChange(number)}
+                onClick={() => number !== '...' ? handlePageChange(number) : null}
                 className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
                   currentPage === number
                     ? 'bg-red-600 text-white'
                     : 'text-gray-400 hover:text-white hover:bg-gray-700'
-                }`}
+                } ${number === '...' ? 'cursor-default' : ''}`}
+                disabled={number === '...'}
               >
                 {number}
               </button>
@@ -126,7 +130,7 @@ const ClipsModal = ({ clips, onClose }) => {
                 className="text-gray-400 hover:text-white focus:outline-none transition-colors p-2 rounded-full hover:bg-gray-700"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 0 011.414-1.414l4 4a1 0 010 1.414l-4 4a1 1 01-1.414 0z" clipRule="evenodd" />
+                  <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 0 011.414-1.414l4 4a1 1 010 1.414l-4 4a1 1 01-1.414 0z" clipRule="evenodd" />
                 </svg>
               </button>
             )}

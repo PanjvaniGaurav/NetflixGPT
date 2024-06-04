@@ -5,6 +5,7 @@ import MainContainer from './MainContainer';
 import SecondaryContainer from './SecondaryContainer';
 import useHorroMovies from '../hooks/useHorroMovies';
 import useRomanticMovies from '../hooks/useRomanticMovies';
+import ModalContainer from './ModalContainer';
 
 const Browse = () => {
   useNowPlaying(); 
@@ -15,6 +16,7 @@ const Browse = () => {
         <Header />
         <MainContainer/>
         <SecondaryContainer/>
+        <ModalContainer/>
     </div>
   )
 }

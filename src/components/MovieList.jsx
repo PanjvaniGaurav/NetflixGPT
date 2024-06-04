@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import MovieCard from './MovieCard';
-import MovieModal from './MovieModal';
+import { setShowMovieModal, setSelectedMovie } from '../utils/moviesSlice';
 
 const MovieList = ({ title, movies }) => {
-  const [selectedMovie, setSelectedMovie] = useState(null);
+  const dispatch = useDispatch();
 
   const handleOpenModal = (movie) => {
-    setSelectedMovie(movie);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedMovie(null);
+    dispatch(setSelectedMovie(movie));
+    dispatch(setShowMovieModal(true));
   };
 
   if (movies === null) return null;
@@ -25,7 +23,6 @@ const MovieList = ({ title, movies }) => {
           ))}
         </div>
       </div>
-      {selectedMovie && <MovieModal movie={selectedMovie} onClose={handleCloseModal} />}
     </div>
   );
 };
